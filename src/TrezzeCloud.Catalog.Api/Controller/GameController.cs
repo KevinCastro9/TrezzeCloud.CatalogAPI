@@ -37,7 +37,7 @@ public sealed class GameController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
-        Response.Headers["X-Deploy-Version"] = "fase4-demo-v2";
+        if (HttpContext is not null) Response.Headers["X-Deploy-Version"] = "fase4-demo-v2";
 
         var cachedGames = await _cacheService.GetAsync<List<GameCacheDto>>(GamesCacheKey, cancellationToken);
 
